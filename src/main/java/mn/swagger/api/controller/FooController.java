@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
 import io.reactivex.Single;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -30,11 +31,10 @@ public class FooController {
     @Operation(summary = "Creates a new bar object adding a decorated id and the current time",
             description = "Showcase of the creation of a dto"
     )
-    @ApiResponse(
+    @ApiResponse(responseCode = "201", description = "Bar object correctly created",
             content = @Content(mediaType = "application/json",
-                    schema = @Schema(type="object"))
+                    schema = @Schema(type="BarDto"))
     )
-    @ApiResponse(responseCode = "201", description = "Bar object correctly created")
     @ApiResponse(responseCode = "400", description = "Invalid id Supplied")
     @ApiResponse(responseCode = "500", description = "Remote error, server is going nuts")
     @Tag(name = "create")
@@ -46,11 +46,10 @@ public class FooController {
     @Operation(summary = "Updates an existing bar object with a new label and modifying the current time",
             description = "Showcase of the update of a dto"
     )
-    @ApiResponse(
+    @ApiResponse(responseCode = "200", description = "Bar object correctly updated",
             content = @Content(mediaType = "application/json",
-                    schema = @Schema(type="object"))
+                    schema = @Schema(type="BarDto"))
     )
-    @ApiResponse(responseCode = "200", description = "Bar object correctly updated")
     @ApiResponse(responseCode = "404", description = "Bar not found by using the provided id")
     @ApiResponse(responseCode = "500", description = "Remote error, server is going nuts")
     @Tag(name = "update")
@@ -65,11 +64,10 @@ public class FooController {
     @Operation(summary = "Find the bar object corresponding to the provided id",
             description = "Showcase of a finder method returning a dto"
     )
-    @ApiResponse(
+    @ApiResponse(responseCode = "200", description = "A bar object has been successfully found and returned",
             content = @Content(mediaType = "application/json",
-                    schema = @Schema(type="object"))
+                    schema = @Schema(type="BarDto"))
     )
-    @ApiResponse(responseCode = "200", description = "A bar object has been successfully found and returned")
     @ApiResponse(responseCode = "404", description = "Bar not found by using the provided id")
     @ApiResponse(responseCode = "500", description = "Remote error, server is going nuts")
     @Tag(name = "findById")
@@ -83,8 +81,10 @@ public class FooController {
     @Get(uri="/bars", produces= APPLICATION_JSON)
     @Operation(summary = "Find all the bar objects",
             description = "Showcase of a method returning a list of dtos")
-    @ApiResponse(content = @Content(mediaType = "application/json", schema = @Schema(type="object")))
-    @ApiResponse(responseCode = "200", description = "A list of bar objects is returned")
+    @ApiResponse(responseCode = "200", description = "A bar object has been successfully found and returned",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type="BarDto"))
+    )
     @ApiResponse(responseCode = "500", description = "Remote error, server is going nuts")
     @Tag(name = "findAll")
     public Single<List<BarDto>> findAll() {

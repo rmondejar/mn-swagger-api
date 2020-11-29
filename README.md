@@ -1,6 +1,6 @@
 # mn-swagger-api
 
-[Documenting our Micronaut v2 applications with Swagger](https://medium.com/@ruuben/managing-jwt-auth-with-micronaut-v2-part-1-c524d7d6165b)
+[Documenting our Micronaut v2 applications with Swagger](https://ruuben.medium.com/documenting-our-micronaut-v2-applications-with-swagger-70412ab849af)
 
 ## Feature openapi documentation
 
